@@ -6,7 +6,6 @@
 - [API](#api)
   * [Transform function](#transform-function)
 - [Example results](#example-results)
-- [API](#api-1)
 - [Related projects](#related-projects)
 - [Running tests](#running-tests)
 - [Contributing](#contributing)
