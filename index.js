@@ -15,7 +15,7 @@
  * extract('// this is a code comment');
  * ```
  * @param  {String} `string` String of javascript
- * @param  {Function} `fn` Optional. Functionto transform commend objects (AST tokens)
+ * @param  {Function} `fn` Optional. Function to transform commend objects (AST tokens)
  * @return {Object} Object of code comments.
  * @api public
  */
