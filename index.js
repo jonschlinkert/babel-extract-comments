@@ -1,44 +1,63 @@
 /*!
  * babel-extract-comments <https://github.com/jonschlinkert/babel-extract-comments>
  *
- * Copyright (c) 2014 Jon Schlinkert, contributors.
- * Licensed under the MIT license.
+ * Copyright (c) 2014-2018, Jon Schlinkert.
+ * Released under the MIT License.
  */
 
 'use strict';
+
+const fs = require('fs');
+const path = require('path');
+const babylon = require('babylon');
 
 /**
  * Extract code comments from the given `string`.
  *
  * ```js
  * var extract = require('babel-extract-comments');
- * extract('// this is a code comment');
+ * console.log(extract('// this is a code comment'));
+ * // [{ type: 'CommentBlock',
+ * //  value: '!\n * babel-extract-comments <https://github.com/jonschlinkert/babel-extract-comments>\n *\n *
+ * // Copyright (c) 2014-2018, Jon Schlinkert.\n * Released under the MIT License.\n ',
+ * //   start: 0,
+ * //   end: 173,
+ * //   loc: SourceLocation { start: [Position], end: [Position] } }]
  * ```
  * @param  {String} `string` String of javascript
- * @param  {Function} `fn` Optional. Function to transform commend objects (AST tokens)
- * @return {Object} Object of code comments.
+ * @return {Array} Array of code comment objects.
  * @api public
  */
 
-module.exports = function(str, fn) {
-  var babel = require('babel-core');
-  var res = babel.transform(str, {
-    ast: true,
-    comments: true,
-    code: false
-  });
+function extract(str, options) {
+  const res = babylon.parse(str, options);
+  return res.comments;
+}
 
-  var comments = res.ast.comments;
-  var len = comments.length, i = -1;
-  while (++i < len) {
-    var comment = comments[i];
-    comment.range = [comment.start, comment.end];
-    if (typeof fn === 'function') {
-      var obj = fn(comment);
-      if (obj) {
-        comment = obj;
-      }
-    }
-  }
-  return comments;
+/**
+ * Extract code comments from a JavaScript file.
+ *
+ * ```js
+ * console.log(extract.file('some-file.js'), { cwd: 'some/path' });
+ * // [ { type: 'Line',
+ * //     value: ' this is a line comment',
+ * //     range: [ 0, 25 ],
+ * //     loc: { start: { line: 1, column: 0 }, end: { line: 1, column: 25 } } } ]
+ * ```
+ * @param  {String} `file` Filepath to the file to parse.
+ * @param  {Object} `options` Options to pass to [esprima][].
+ * @return {Array} Array of code comment objects.
+ * @api public
+ */
+
+extract.file = function(file, options) {
+  const opts = Object.assign({ cwd: process.cwd() }, options);
+  const str = fs.readFileSync(path.resolve(opts.cwd, file), 'utf8');
+  return extract(str, options);
 };
+
+/**
+ * Expose `extract`
+ */
+
+module.exports = extract;
