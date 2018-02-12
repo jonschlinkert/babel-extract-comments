@@ -1,7 +1,7 @@
 {
   "name": "babel-extract-comments",
   "description": "Uses babel (babylon) to extract JavaScript code comments from a JavaScript string or file.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/jonschlinkert/babel-extract-comments",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/babel-extract-comments",
