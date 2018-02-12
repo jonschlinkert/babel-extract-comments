@@ -20,6 +20,7 @@ function App(options) {
  * @api public
  */
 
+// this is a line comment
 App.prototype.set = function(key, value) {};
 
 /**
