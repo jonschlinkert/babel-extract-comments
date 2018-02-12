@@ -1,6 +1,6 @@
 {
   "name": "babel-extract-comments",
-  "description": "Uses babel to extract JavaScript code comments from a string. Returns an array of comment objects, with line, column, index, comment type and comment string.",
+  "description": "Uses babel (babylon) to extract JavaScript code comments from a JavaScript string or file.",
   "version": "0.1.0",
   "homepage": "https://github.com/jonschlinkert/babel-extract-comments",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
@@ -14,30 +14,39 @@
   ],
   "main": "index.js",
   "engines": {
-    "node": ">=0.8"
+    "node": ">=4"
   },
   "scripts": {
     "test": "mocha"
   },
   "dependencies": {
-    "babel-core": "^6.3.26"
+    "babylon": "^6.18.0"
   },
   "devDependencies": {
-    "gulp-format-md": "^0.1.4"
+    "gulp-format-md": "^1.0.0",
+    "mocha": "^3.5.3"
   },
   "keywords": [
+    "babel",
     "block",
     "code",
     "comment",
     "comments",
     "context",
-    "babel",
     "extract",
     "glob",
     "javascript",
     "parse"
   ],
   "verb": {
+    "toc": false,
+    "layout": "default",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
     "related": {
       "list": [
         "esprima-extract-comments",
@@ -46,9 +55,8 @@
         "parse-comments"
       ]
     },
-    "plugins": [
-      "gulp-format-md"
-    ],
-    "layout": "default"
+    "lint": {
+      "reflinks": true
+    }
   }
 }
