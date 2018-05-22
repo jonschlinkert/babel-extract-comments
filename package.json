@@ -20,7 +20,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "babylon": "^6.18.0"
+    "babylon": "^7.0.0-beta.47"
   },
   "devDependencies": {
     "gulp-format-md": "^1.0.0",
